@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  /* Definiert das typische boerse.de Blau als v4-Klasse */
+  --color-boerse: #00569d; 
+}
