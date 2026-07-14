@@ -48,7 +48,7 @@ src/
 │   ├── locales/
 │   │   ├── de.json           # Deutsche Übersetzungen
 │   │   └── en.json           # Englische Übersetzungen
-│   └── i18nContext.jsx       # contextLoader
+│   └── i18nContext.tsx       # contextLoader
 |
 ├── components/
 │   ├── FundChartTab.jsx      # Highcharts Rendering & Zeitreihen-Filter
