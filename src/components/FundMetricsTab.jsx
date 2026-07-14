@@ -1,7 +1,10 @@
 //FundMetricsTable.jsx
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
-export default function FundMetricsTable({ fundCode }) {
+export default function FundMetricsTab({ fundCode }) {
+
+  const { t } = useTranslation(); 
   const metrics = useMemo(() => {
     const codeNum = parseInt(fundCode) || 0;
     return {
@@ -15,18 +18,18 @@ export default function FundMetricsTable({ fundCode }) {
   }, [fundCode]);
 
   const rows = [
-    { label: 'Dividendenrendite', value: `${metrics.dividendeProzent} %` },
-    { label: 'Ex-Dividendentag', value: metrics.exDatum },
-    { label: 'Ausschüttungstag', value: metrics.zahlungsDatum },
-    { label: 'Fondsvolumen', value: metrics.fondsvolumen },
-    { label: 'Gesamtkostenquote (TER)', value: metrics.ter },
-    { label: 'Risikoklasse (SRRI)', value: `${metrics.risikoklasse} von 7` },
+    { label: t('divYield'), value: `${metrics.dividendeProzent} %` },
+    { label: t('exDate'), value: metrics.exDatum },
+    { label: t('payDate'), value: metrics.zahlungsDatum },
+    { label: t('volume'), value: metrics.fondsvolumen },
+    { label: t('ter'), value: metrics.ter },
+    { label: t('riskClass'), value: `${metrics.risikoklasse} von 7` },
   ];
 
   return (
     <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-xs">
       <h3 className="text-sm font-bold uppercase tracking-wider text-boerse border-b border-gray-100 pb-2.5 mb-4">
-        Ausschüttung & Fundamentaldaten
+         {t('metricsTitle')} 
       </h3>
       <div className="overflow-hidden rounded-lg border border-gray-100">
         <table className="w-full border-collapse text-sm text-left">

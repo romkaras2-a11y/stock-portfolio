@@ -26,8 +26,8 @@ export default function FundChartTab({ rawChartData }) {
     chart: { type: 'area', height: 350 },
     xAxis: { type: 'datetime' },
     yAxis: { 
-      title: { text: 'Wert' },
-      labels: { formatter: function () { return this.value.toFixed(2) + ' $'; } }
+      title: { text: 'Wert in Währung' },
+      labels: { formatter: function () { return this.value.toFixed(2) + ' €'; } }
     },
     credits: { enabled: false },
     series: [{

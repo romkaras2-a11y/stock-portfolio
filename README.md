@@ -1,16 +1,75 @@
-# React + Vite
+# 📈 React Wertpapier-Porträt (boerse.de Style)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ein modulares, performantes React-Frontend zur Visualisierung von Investmentfonds-Porträts im klassischen Stil von boerse.de. Das Projekt bündelt ein interaktives Highcharts-Diagramm, granulare Kennzahlen-Tabs, eine Live-Suchfunktion sowie ein lokales Favoriten-System.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Highcharts-Finanzchart**: Interaktiver `area`-Linienverlauf inklusive responsivem Zeitraum-Umschalter (1M, 6M, 1Y, MAX).
+- **Separation of Concerns**: Saubere Architektur durch Aufteilung in spezialisierte Sub-Komponenten (`SearchBar`, `TabBar`, `FundChartTab`, etc.).
+- **Tailwind CSS v4 Engine**: Modernes, ultraschnelles Styling über die neue v4-Plugin-Architektur (Konfiguration rein via CSS-Variablen).
+- **Performance-Optimiert**: 
+  - *Debounced Search*: API-Schonung durch 300ms Eingabeverzögerung.
+  - *In-Memory Caching*: Kein doppelter Netzwerk-Traffic beim Hin- und Herwechseln von Wertpapieren.
+  - *Cascading-Render-Schutz*: Zustandsberechnung über `useMemo` anstelle von doppelten `useEffect`-States.
+- **Watchlist-System**: Speicherung von Favoriten-Fonds direkt im clientseitigen `localStorage`.
+- **UX & i18n**: Visuell saubere Lademaske (Skeleton-Loader) gegen Layout-Shifts sowie integrierter nativer Sprachumschalter (DE/EN).
 
-## React Compiler
+## 🛠️ Tech-Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React 18+ (Vite Bundler)
+- **Charts**: Highcharts & `highcharts-react-official`
+- **Styles**: Tailwind CSS v4
+- **API**: Offene REST-Schnittstelle von `api.mfapi.in` (NAV-Fondsdaten Zeitreihen)
 
-## Expanding the ESLint configuration
+## 💻 Installation & Lokaler Start
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Repository klonen & Abhängigkeiten installieren
+```bash
+git clone <dein-repository-url>
+cd stock-portfolio
+npm install
+```
+
+### 2. Lokaler Dev-Proxy (Bereits in Vite vorkonfiguriert)
+Das Projekt nutzt in der `vite.config.js` einen integrierten Proxy, um CORS-Restriktionen im Browser zu umgehen. Alle Anfragen an `/api/*` werden automatisch an den API-Server weitergeleitet.
+
+### 3. Entwicklungsserver starten
+```bash
+npm run dev
+```
+Öffne anschließend [http://localhost:5173](http://localhost:5173) in deinem Browser.
+
+## 📁 Projektstruktur
+
+```text
+
+src/
+├── i18n/
+│   ├── locales/
+│   │   ├── de.json           # Deutsche Übersetzungen
+│   │   └── en.json           # Englische Übersetzungen
+│   └── i18nContext.jsx       # contextLoader
+|
+├── components/
+│   ├── FundChartTab.jsx      # Highcharts Rendering & Zeitreihen-Filter
+│   ├── FundMetricsTable.jsx  # Tabelle für Fundamentaldaten & Dividenden
+│   ├── FundPolicyCard.jsx    # Textkarte für die Anlagepolitik
+│   ├── FundSkeleton.jsx      # Pulsierender Skeleton-Loader für die UX
+│   ├── SearchBar.jsx         # Debounced Suchfeld inkl. Favoriten-Dropdown
+│   ├── TabBar.jsx            # boerse.de Reiter-Steuerung
+│   └── StockPortrait.jsx     # Hauptkomponente & State-Zentrale
+├── services/
+│   ├── fundApi.js            # API Fetching & In-Memory Cache
+│   └── i18nContext.jsx       # Internationalisierung Context (DE/EN)
+├── index.css                 # Tailwind v4 Direktiven & Theme-Variablen
+└── main.jsx                  # React Applikations-Root
+```
+
+## 📝 Lizenz
+
+MIT License - Freie Nutzung für private und kommerzielle Zwecke.
+
+## Author
+
+Roman Karas
+
