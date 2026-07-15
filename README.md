@@ -62,6 +62,7 @@ src/
 │   └── fundApi.ts            # API Fetching & In-Memory Cache
 │         
 ├── index.css                 # Tailwind v4 Direktiven & Theme-Variablen
+├── App.tsx                   # Globales Layout & State-Sync
 └── main.tsx                  # React Applikations-Root
 ```
 
