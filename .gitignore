@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 src/**/*.jsx
+src/**/*.js
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +23,4 @@ src/**/*.jsx
 *.njsproj
 *.sln
 *.sw?
+
