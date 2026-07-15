@@ -18,8 +18,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": false
   },
+   /* Vite-Typen-Support */
+  "types": ["vite/client"],
   "include": [
-    "src",
-    
-],
+    "src", "src/services/.fundApi.js",    
+  ],
 }

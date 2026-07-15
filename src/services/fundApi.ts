@@ -37,13 +37,17 @@ export interface SearchResultItem {
 
 const fundCache: Record<string, FundResult> = {};
 
+
+const env = (import.meta as any).env;
+const apiUrl = env.VITE_API_URL;
+
 export const fetchFundDetailsAndChart = async (fundCode: string): Promise<FundResult> => {
   if (fundCache[fundCode]) {
     return fundCache[fundCode];
   }
 
   try {
-    const response = await fetch(`/api/mf/${fundCode}`);
+    const response = await fetch(`${apiUrl}${fundCode}`);
     if (!response.ok) throw new Error(`API-Fehler: Status ${response.status}`);
     
     const json: ApiResponse = await response.json();
@@ -75,7 +79,7 @@ export const fetchFundDetailsAndChart = async (fundCode: string): Promise<FundRe
 export const searchFunds = async (query: string): Promise<SearchResultItem[]> => {
   if (!query || query.length < 3) return [];
   try {
-    const response = await fetch(`/api/mf/search?q=${encodeURIComponent(query)}`);
+    const response = await fetch(`${apiUrl}search?q=${encodeURIComponent(query)}`);
     if (!response.ok) return [];
     const json: SearchResultItem[] = await response.json();
     return json;

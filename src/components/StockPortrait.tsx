@@ -4,7 +4,7 @@ import { fetchFundDetailsAndChart, FundResult } from '../services/fundApi';
 import { useTranslation } from 'react-i18next';
 import SearchBarTs from './SearchBar.tsx';
 import TabBarTs from './TabBar.tsx';
-import FundChartTabTs from './FundChartTab.tsx';
+import FundChartTab from './FundChartTab.tsx';
 import FundPolicyTabTs from './FundPolicyTab.tsx';
 import FundMetricsTabTs from './FundMetricsTab.tsx';
 import LoadingOverlayTs from './LoadingOverlay.tsx';
@@ -131,7 +131,7 @@ export default function StockPortrait() {
       {/* INHALTS-WECHSEL */}
         <main className="mt-5">
         { activeTab === 'chart' && (
-          <FundChartTabTs rawChartData={rawData.chartData} />
+          <FundChartTab rawChartData={rawData.chartData} />
         )}
 
         { activeTab === 'policy' && (

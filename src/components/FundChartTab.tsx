@@ -1,16 +1,16 @@
 // FundChartTab.jsx
 import { useState, useMemo } from 'react';
 import Highcharts from 'highcharts';
-import _HighchartsReact from 'highcharts-react-official';
+import {HighchartsReact} from 'highcharts-react-official';
 import { ChartDataPoint } from '../services/fundApi';
 
-const HighchartsReact = _HighchartsReact || _HighchartsReact;
+//const HighchartsReact =  _HighchartsReact.default || _HighchartsReact;
 
 interface FundChartTabProps {
   rawChartData: ChartDataPoint[];
 }
 
-export default function FundChartTabTs({ rawChartData }:FundChartTabProps) {
+function FundChartTab({ rawChartData }:FundChartTabProps) {
   const [timeframe, setTimeframe] = useState('MAX');
 
   const filteredChartData = useMemo(() => {
@@ -76,3 +76,4 @@ export default function FundChartTabTs({ rawChartData }:FundChartTabProps) {
   );
 }
 
+export default FundChartTab
