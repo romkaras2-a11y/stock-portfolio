@@ -48,21 +48,23 @@ src/
 │   ├── locales/
 │   │   ├── de.json           # Deutsche Übersetzungen
 │   │   └── en.json           # Englische Übersetzungen
-│   └── i18nContext.tsx       # Internationalisierung Context (DE/EN)
+│   └── i18nContext.jsx       # Internationalisierung Context (DE/EN)
 |
 ├── components/
-│   ├── FundChartTab.tsx      # Highcharts Rendering & Zeitreihen-Filter
-│   ├── FundMetricsTable.tsx  # Tabelle für Fundamentaldaten & Dividenden
-│   ├── FundPolicyCard.tsx    # Textkarte für die Anlagepolitik
-│   ├── FundSkeleton.tsx      # Pulsierender Skeleton-Loader für die UX
-│   ├── SearchBar.tsx         # Debounced Suchfeld inkl. Favoriten-Dropdown
-│   ├── TabBar.tsx            # boerse.de Reiter-Steuerung
-│   └── StockPortrait.tsx     # Hauptkomponente & State-Zentrale
+│   ├── FundChartTab.jsx      # Highcharts Rendering & Zeitreihen-Filter
+│   ├── FundMetricsTable.jsx  # Tabelle für Fundamentaldaten & Dividenden
+│   ├── FundPolicyCard.jsx    # Textkarte für die Anlagepolitik
+│   ├── FundSkeleton.jsx      # Pulsierender Skeleton-Loader für die UX
+│   ├── SearchBar.jsx         # Debounced Suchfeld inkl. Favoriten-Dropdown
+│   ├── TabBar.jsx            # boerse.de Reiter-Steuerung
+│   └── StockPortrait.jsx     # Hauptkomponente & State-Zentrale
 ├── services/
-│   └── fundApi.ts            # API Fetching & In-Memory Cache
+│   └── fundApi.js            # API Fetching & In-Memory Cache
 │         
 ├── index.css                 # Tailwind v4 Direktiven & Theme-Variablen
-└── main.tsx                  # React Applikations-Root
+├── App.jsx                   # Globales Layout & State-Sync
+└── main.jsx                  # React Applikations-Root
+
 ```
 
 ## 📝 Lizenz
