@@ -1,22 +1,15 @@
 // components/SearchBar.jsx
 import { useState, useEffect } from 'react';
-import { searchFunds, SearchResultItem } from '../services/fundApi';
+import { searchFunds } from '../services/fundApi';
 import { useTranslation } from 'react-i18next';
 
-interface SearchBarProps {
-  onSelectFund: (code: string) => void;
-  watchlist: Array<{ code: string; name: string }>;
-  onToggleWatchlist: () => void;
-  currentFundCode: string;
-}
-
-export default function SearchBarTs({ onSelectFund, watchlist, onToggleWatchlist, currentFundCode }:SearchBarProps) {
+export default function SearchBar({ onSelectFund, watchlist, onToggleWatchlist, currentFundCode }) {
 
   const { t } = useTranslation();
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [debouncedQuery, setDebouncedQuery] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<SearchResultItem[]>([]);
-  const [showWatchlist, setShowWatchlist] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showWatchlist, setShowWatchlist] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedQuery(searchQuery), 300);
@@ -65,9 +58,10 @@ export default function SearchBarTs({ onSelectFund, watchlist, onToggleWatchlist
       {searchResults.length > 0 && (
         <div className="absolute w-full bg-white border border-gray-200 rounded-lg shadow-xl z-50 mt-1 max-h-64 overflow-y-auto divide-y divide-gray-100">
           {searchResults.map((item) => (
-            <div key={item.schemeCode} 
+            <div 
+              key={item.schemeCode} 
               onClick={() => {
-                onSelectFund(item.schemeCode);
+                onSelectFund(item.schemeCode, item.schemeName);
                 setSearchQuery("");
                 setSearchResults([]);
               }}
@@ -87,7 +81,7 @@ export default function SearchBarTs({ onSelectFund, watchlist, onToggleWatchlist
             <div 
               key={item.code}
               onMouseDown={() => {
-                onSelectFund(item.code);
+                onSelectFund(item.code, item.name);
                 setShowWatchlist(false);
               }}
               className="p-3 cursor-pointer text-sm text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition-colors flex justify-between"

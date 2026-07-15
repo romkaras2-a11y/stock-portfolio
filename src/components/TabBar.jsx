@@ -1,13 +1,8 @@
-// components/TabBar.tsx
+// components/TabBar.jsx
 //import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface TabBarProps {
-  activeTab: string;
-  onTabChange: (tab: string) => void;
-}
-
-export default function TabBarTs({ activeTab, onTabChange }:TabBarProps) {
+export default function TabBar({ activeTab, onTabChange }) {
 
     const { t } = useTranslation();
     const btnCls="px-5 py-2.5 font-bold text-sm rounded-t-lg transition-colors cursor-pointer";

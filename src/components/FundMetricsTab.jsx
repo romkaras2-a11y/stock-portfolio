@@ -2,11 +2,7 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface FundMetricsTableProps {
-  fundCode: string;
-}
-
-export default function FundMetricsTabTs({ fundCode }: FundMetricsTableProps) {
+export default function FundMetricsTab({ fundCode }) {
 
   const { t } = useTranslation(); 
   const metrics = useMemo(() => {

@@ -1,29 +1,24 @@
 // components/StockPortrait
 import  { useState, useEffect, useMemo } from 'react';
-import { fetchFundDetailsAndChart, FundResult } from '../services/fundApi';
+import { fetchFundDetailsAndChart } from '../services/fundApi';
 import { useTranslation } from 'react-i18next';
-import SearchBarTs from './SearchBar.tsx';
-import TabBarTs from './TabBar.tsx';
-import FundChartTab from './FundChartTab.tsx';
-import FundPolicyTabTs from './FundPolicyTab.tsx';
-import FundMetricsTabTs from './FundMetricsTab.tsx';
-import LoadingOverlayTs from './LoadingOverlay.tsx';
-
-interface WatchlistItem {
-  code: string;
-  name: string;
-}
+import SearchBar from './SearchBar';
+import TabBar from './TabBar';
+import FundChartTab from './FundChartTab';
+import FundPolicyTab from './FundPolicyTab';
+import FundMetricsTab from './FundMetricsTab';
+import LoadingOverlay from './LoadingOverlay';
 
 export default function StockPortrait() {
  const { t, i18n } = useTranslation();
-  const [fundCode, setFundCode] = useState<string>("102885");
-  const [rawData, setRawData] = useState<FundResult>({ details:{ name: '', scheme: '', isin: '' }, chartData: [] });
-  const [activeTab, setActiveTab] = useState<string>('chart');
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [fundCode, setFundCode] = useState("102885");
+  const [rawData, setRawData] = useState({ details: null, chartData: [] });
+  const [activeTab, setActiveTab] = useState('chart');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Watchlist State mit Initialisierung aus dem localStorage
-  const [watchlist, setWatchlist] = useState<WatchlistItem[]>(() => {
+  const [watchlist, setWatchlist] = useState(() => {
     const saved = localStorage.getItem('fund_watchlist');
     return saved ? JSON.parse(saved) : [
       { code: "102885", name: "Invesco India Growth Fund" } // Ein Standardfonds als Initialwert
@@ -42,8 +37,8 @@ export default function StockPortrait() {
         const result = await fetchFundDetailsAndChart(fundCode);
         setRawData(result);
         setActiveTab('chart');
-      } catch (err:any) {
-        setError(err.message || 'Fehler beim Laden');
+      } catch (err) {
+        setError(err.message);
       } finally {
         setIsLoading(false);
       }
@@ -61,7 +56,7 @@ export default function StockPortrait() {
     const percent = ((change / previous) * 100).toFixed(2);
     
     return { latest, change, percent };
-  }, [rawData.chartData]);
+  }, [rawData]);
 
   // Funktion zum Hinzufügen/Entfernen von Favoriten
   const handleToggleWatchlist = () => {
@@ -73,12 +68,12 @@ export default function StockPortrait() {
     }
   };  
   // Callback, wenn ein Fonds über die Suche ausgewählt wird
-  const handleSelectFund = (code:string) => {
+  const handleSelectFund = (code) => {
     setFundCode(code);
   };
   const isPositive = perfData.change >= 0;
 
-  if (isLoading) return <LoadingOverlayTs />;
+  if (isLoading) return <LoadingOverlay />;
   if (error) return <div className="p-10 text-center text-red-600 font-bold">Fehler: {error}</div>;
 
   return (
@@ -86,7 +81,7 @@ export default function StockPortrait() {
         {/* CONTAINER FÜR SUCHLEISTE + SPRACHUMSCHALTER NEBENAND */}
         <div className="flex items-start gap-4 w-full">
           <div className="flex-1">
-            <SearchBarTs onSelectFund={handleSelectFund} onToggleWatchlist={handleToggleWatchlist}
+            <SearchBar onSelectFund={handleSelectFund} onToggleWatchlist={handleToggleWatchlist}
               watchlist={watchlist} currentFundCode={fundCode}
             />
           </div>
@@ -127,7 +122,7 @@ export default function StockPortrait() {
           </div>
         </div>
       {/* TAB-NAVIGATION */}
-      <TabBarTs activeTab={activeTab} onTabChange={setActiveTab} />
+      <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
       {/* INHALTS-WECHSEL */}
         <main className="mt-5">
         { activeTab === 'chart' && (
@@ -135,11 +130,11 @@ export default function StockPortrait() {
         )}
 
         { activeTab === 'policy' && (
-           <FundPolicyTabTs fundHouse={rawData.details?.name} />
+           <FundPolicyTab fundHouse={rawData.details?.name} />
         )}
 
         {activeTab === 'metrics' && (
-          <FundMetricsTabTs fundCode={fundCode} />
+          <FundMetricsTab fundCode={fundCode} />
         )}
         </main>
     </div>

@@ -1,16 +1,11 @@
 // FundChartTab.jsx
 import { useState, useMemo } from 'react';
 import Highcharts from 'highcharts';
-import {HighchartsReact} from 'highcharts-react-official';
-import { ChartDataPoint } from '../services/fundApi';
+import _HighchartsReact from 'highcharts-react-official';
 
-//const HighchartsReact =  _HighchartsReact.default || _HighchartsReact;
+const HighchartsReact = _HighchartsReact.default || _HighchartsReact;
 
-interface FundChartTabProps {
-  rawChartData: ChartDataPoint[];
-}
-
-function FundChartTab({ rawChartData }:FundChartTabProps) {
+export default function FundChartTab({ rawChartData }) {
   const [timeframe, setTimeframe] = useState('MAX');
 
   const filteredChartData = useMemo(() => {
@@ -32,12 +27,7 @@ function FundChartTab({ rawChartData }:FundChartTabProps) {
     xAxis: { type: 'datetime' },
     yAxis: { 
       title: { text: 'Wert in Währung' },
-      labels: { 
-            formatter: function (this: Highcharts.AxisLabelsFormatterContextObject) {
-                const val = typeof this.value === 'number' ? this.value : parseFloat(this.value);
-               return val.toFixed(2) + ' €'; 
-            } 
-        }
+      labels: { formatter: function () { return this.value.toFixed(2) + ' €'; } }
     },
     credits: { enabled: false },
     series: [{
@@ -56,7 +46,7 @@ function FundChartTab({ rawChartData }:FundChartTabProps) {
       <div className="flex justify-between items-center mb-4">
         <span className="font-bold text-gray-700 text-sm">Historischer Verlauf</span>
         <div className="flex gap-1.5">
-          {['1M', '6M', '1Y', 'MAX'].map((t) => (           
+          {['1M', '6M', '1Y', 'MAX'].map((t) => (
             <button
               key={t}
               onClick={() => setTimeframe(t)}
@@ -76,4 +66,3 @@ function FundChartTab({ rawChartData }:FundChartTabProps) {
   );
 }
 
-export default FundChartTab

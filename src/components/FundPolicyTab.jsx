@@ -2,11 +2,7 @@
 //import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface FundPolicyCardProps {
-  fundHouse: string;
-}
-
-export default function FundPolicyTabTs({ fundHouse }: FundPolicyCardProps) {
+export default function FundPolicyTab({ fundHouse }) {
 
    const { t } = useTranslation(); 
 
