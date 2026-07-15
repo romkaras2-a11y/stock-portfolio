@@ -48,7 +48,11 @@ src/
 │   ├── locales/
 │   │   ├── de.json           # Deutsche Übersetzungen
 │   │   └── en.json           # Englische Übersetzungen
+<<<<<<< HEAD
 │   └── i18nContext.tsx       # Internationalisierung Context (DE/EN)
+=======
+│   └── i18nContext.tsx       # contextLoader
+>>>>>>> f59b5a2e301a93d68a75212687220f966107df51
 |
 ├── components/
 │   ├── FundChartTab.tsx      # Highcharts Rendering & Zeitreihen-Filter
