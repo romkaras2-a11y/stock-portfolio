@@ -49,7 +49,6 @@ src/
 │   │   ├── de.json           # Deutsche Übersetzungen
 │   │   └── en.json           # Englische Übersetzungen
 │   └── i18nContext.tsx       # Internationalisierung Context (DE/EN)
-│   └── i18nContext.tsx       # contextLoader
 |
 ├── components/
 │   ├── FundChartTab.tsx      # Highcharts Rendering & Zeitreihen-Filter
@@ -60,7 +59,7 @@ src/
 │   ├── TabBar.tsx            # boerse.de Reiter-Steuerung
 │   └── StockPortrait.tsx     # Hauptkomponente & State-Zentrale
 ├── services/
-│   └── fundApi.js            # API Fetching & In-Memory Cache
+│   └── fundApi.ts            # API Fetching & In-Memory Cache
 │         
 ├── index.css                 # Tailwind v4 Direktiven & Theme-Variablen
 └── main.tsx                  # React Applikations-Root
