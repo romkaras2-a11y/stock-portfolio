@@ -1,4 +1,4 @@
-# 📈 React Wertpapier-Porträt (boerse.de Style)
+# 📈 React Wertpapier-Porträt "boerse.de Style"
 
 Ein modulares, performantes React-Frontend zur Visualisierung von Investmentfonds-Porträts im "klassischen Stil von boerse.de". Das Projekt bündelt ein interaktives Highcharts-Diagramm, granulare Kennzahlen-Tabs, eine Live-Suchfunktion sowie ein lokales Favoriten-System.
 
